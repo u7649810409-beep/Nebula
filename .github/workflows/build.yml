@@ -3,7 +3,7 @@ name: Build Nebula Client
 on:
   push:
     paths:
-      - 'client-mod/**'
+      - 'src/**'
       - '.github/workflows/build.yml'
   workflow_dispatch:
 
@@ -23,12 +23,10 @@ jobs:
           gradle-version: '9.2.0'
 
       - name: Mod bauen
-        working-directory: client-mod
         run: gradle build --no-daemon
 
       - name: Jar hochladen
         uses: actions/upload-artifact@v4
         with:
           name: nebula-client
-          path: client-mod/build/libs/nebula-client-*+mc*.jar
           if-no-files-found: error
